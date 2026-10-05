@@ -1,0 +1,42 @@
+{
+  "name": "aura-moodboard",
+  "productName": "AURA moodboard",
+  "version": "0.3.0",
+  "description": "AURA moodboard: moodboard per designer e art director",
+  "author": "AURA",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "release": "electron-builder --win nsis --publish always"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "electron-updater": "^6.3.9",
+    "extract-zip": "^2.0.1",
+    "ffmpeg-static": "^5.2.0",
+    "heic-convert": "^2.1.0",
+    "music-metadata": "^11.0.0"
+  },
+  "devDependencies": { "electron": "^33.0.0", "electron-builder": "^25.1.8" },
+  "build": {
+    "appId": "app.aura.moodboard",
+    "productName": "AURA moodboard",
+    "copyright": "AURA moodboard",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["src/**/*", "assets/**/*", "package.json"],
+    "asarUnpack": ["node_modules/ffmpeg-static/**"],
+    "fileAssociations": [{ "ext": "aura", "name": "Progetto AURA moodboard", "description": "Progetto AURA moodboard", "icon": "build/icon.ico" }],
+    "publish": [{ "provider": "github", "owner": "Erliaa", "repo": "aura-moodboard" }],
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "icon": "build/icon.ico" },
+    "nsis": {
+      "oneClick": false, "perMachine": false, "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true, "createStartMenuShortcut": true, "shortcutName": "AURA moodboard",
+      "deleteAppDataOnUninstall": false, "installerIcon": "build/icon.ico", "uninstallerIcon": "build/icon.ico", "language": "1040"
+    },
+    "portable": { "artifactName": "AURA-moodboard-portatile-${version}.exe" },
+    "artifactName": "AURA-moodboard-Setup-${version}.${ext}"
+  }
+}
